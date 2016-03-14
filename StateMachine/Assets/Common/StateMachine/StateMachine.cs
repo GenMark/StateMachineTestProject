@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class StateMachine{
    
-    public enum smEvent { eOnMainMenu, eOnOption, eOnPause, eOnGame, eGameOver, eGameComplete };
     public delegate void dsme(string stateTag);
     public static event dsme eOnStartState = (string stateTag) => { };
     public static event dsme eOnStopState = (string stateTag) => { };
@@ -22,15 +22,14 @@ public class StateMachine{
         curState.StartState();
     }
 
-    public static void SetEvent(smEvent sEvent) {
-        foreach(StateConnection connection in scTable) {
-            if(connection.fromState == curState && connection.smEvent == sEvent) {
-                eOnStopState(curState.tag);
-                curState.StopState();
-                curState = connection.toState;
-                eOnStartState(curState.tag);
-                curState.StartState();
-            }
+    public static void SetEvent(string sEvent) {
+        StateConnection connection = scTable.SingleOrDefault(c =>  c.fromState == curState && c.smEvent == sEvent );
+        if(connection != null) {
+            eOnStopState(curState.tag);
+            curState.StopState();
+            curState = connection.toState;
+            eOnStartState(curState.tag);
+            curState.StartState();
         }
     }
 }

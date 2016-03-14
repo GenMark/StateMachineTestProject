@@ -7,22 +7,22 @@ public class SceneButtonsOnClick : MonoBehaviour {
         Debug.Log("OnClickButton -> " + name);
         switch (name) {
             case "Options":
-                StateMachine.SetEvent(StateMachine.smEvent.eOnOption);
+                StateMachine.SetEvent(GameStateMachine.eOnOption);
                 break;
             case "Game":
-                StateMachine.SetEvent(StateMachine.smEvent.eOnGame);
+                StateMachine.SetEvent(GameStateMachine.eOnGame);
                 break;
             case "MainMenu":
-                StateMachine.SetEvent(StateMachine.smEvent.eOnMainMenu);
+                StateMachine.SetEvent(GameStateMachine.eOnMainMenu);
                 break;
             case "Pause":
-                StateMachine.SetEvent(StateMachine.smEvent.eOnPause);
+                StateMachine.SetEvent(GameStateMachine.eOnPause);
                 break;
             case "Fail":
-                StateMachine.SetEvent(StateMachine.smEvent.eGameOver);
+                StateMachine.SetEvent(GameStateMachine.eGameOver);
                 break;
             case "Win":
-                StateMachine.SetEvent(StateMachine.smEvent.eGameComplete);
+                StateMachine.SetEvent(GameStateMachine.eGameComplete);
                 break;
         }
     }
